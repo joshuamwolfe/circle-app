@@ -1,15 +1,28 @@
-import React from 'react';
-import Circle from './Circle';
+import React, { useState } from "react";
+import Circle from "./Circle";
+import ColorButtons from "./ColorButtons";
 
-function ColoredCircles () {
-    const circles = ['indigo', 'peachpuff', 'lavender',];
-    return (
-        <div>
-            {circles.map((color, idx) => (
-                <Circle color={color} idx={idx} />
-            ))}
-        </div>
-    )
+function ColoredCircles() {
+  const [circles, setCircles] = useState([
+    "cornflowerblue",
+    "peachpuff",
+    "lavender",
+  ]);
+  const addCircle = (color) => {
+    setCircles((circles) => [...circles, color]);
+  };
+  return (
+    <div>
+      <ColorButtons
+        addCircle={addCircle}
+        options={["peachpuff", "lightsteelblue", "paleturquoise"]}
+      />
+
+      {circles.map((color, idx) => (
+        <Circle color={color} idx={idx} key={idx} />
+      ))}
+    </div>
+  );
 }
 
 export default ColoredCircles;
